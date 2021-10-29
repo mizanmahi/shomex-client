@@ -1,0 +1,20 @@
+[
+   {
+      "name": "Parcel Delivery",
+      "price": "80+",
+      "description": "Personal small business and corporate first mile pickup and last mile delivery service",
+      "imageUrl": "https://i.ibb.co/HYC1pRh/parceldelivery.jpg"
+   },
+   {
+      "name": "Load Unload",
+      "price": "500+",
+      "description": "We offer load and unloading services to the mid to large size companies",
+      "imageUrl": "https://i.ibb.co/Zc2zgT0/loadunload.jpg"
+   },
+   {
+      "name": "Warehouse Service",
+      "price": "900+",
+      "description": "Full solution of stacking testify and processing of goods with very lower cost",
+      "imageUrl": "https://i.ibb.co/PMddv7q/warehouse.jpg"
+   }
+]
