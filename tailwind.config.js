@@ -13,7 +13,11 @@ module.exports = {
             '2xl': '0 6rem',
          },
       },
-      extend: {},
+      extend: {
+         colors: {
+            googleBlue: '#4285F4',
+          }
+      },
    },
    variants: {
       extend: {},

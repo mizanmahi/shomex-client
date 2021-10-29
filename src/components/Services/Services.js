@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import Service from '../Service/Service';
+import Spinner from '../Spinner/Spinner';
 
 const Services = () => {
-   const { data, loading } = useFetch(
-      'http://localhost:5000/services'
-   );
+   const { data, loading } = useFetch('http://localhost:5000/services');
 
    console.log(data);
 
@@ -22,21 +21,20 @@ const Services = () => {
                <hr className='w-16 h-1 bg-blue-900 mt-2 mx-auto' />
             </div>
 
-            <div className='grid xl:grid-cols-3 md:grid-cols-2 gap-12 place-items-center'>
+            <>
                {loading ? (
-                  <h2>Loading...</h2>
+                  <Spinner />
                ) : (
-                  <>
+                  <div className='grid xl:grid-cols-3 md:grid-cols-2 gap-12 place-items-center'>
                      {data?.map((service) => (
-                         <Service key={service._id} service={service} />
+                        <Service key={service._id} service={service} />
                      ))}
-                  </>
+                  </div>
                )}
-            </div>
+            </>
          </div>
       </section>
    );
 };
 
 export default Services;
-

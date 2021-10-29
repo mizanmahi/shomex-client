@@ -15,15 +15,12 @@ const Service = ({ service }) => {
                   </span>
                   <Link
                      className='mt-3 px-5 py-1 rounded border border-blue-900'
-                     to={`serviceDetails/:${_id}`}
+                     to={`serviceDetails/${_id}`}
                   >
                      Get this Service
                   </Link>
                </div>
                <p className='text-md text-gray-700'>{description}</p>
-            </div>
-            <div>
-               <button></button>
             </div>
          </div>
       </div>
