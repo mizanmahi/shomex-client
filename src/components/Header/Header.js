@@ -15,9 +15,16 @@ const Header = () => {
                   <NavLink
                      className='py-6 inline-block border-b-2 border-transparent mr-10'
                      activeClassName='border-blue-50 border-b-2'
-                     to='/myService'
+                     to='/myOrders'
                   >
-                     My Service
+                     My Orders
+                  </NavLink>
+                  <NavLink
+                     className='py-6 inline-block border-b-2 border-transparent mr-10'
+                     activeClassName='border-blue-50 border-b-2'
+                     to='/manageOrders'
+                  >
+                     Manage All Orders
                   </NavLink>
                   <NavLink
                      className='py-6 inline-block border-b-2 border-transparent mr-10'

@@ -1,17 +1,28 @@
 import React from 'react';
+import { useHistory, useLocation } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 // import useFirebase from '../hooks/useFirebase';
 import googleLogo from '../media/google.png';
 
 const Login = () => {
-   const { signInWithGoogle, setUserLoading } = useAuth();
+   const { signInWithGoogle, setUserLoading, setError, error } = useAuth();
+   const location = useLocation();
+   const history = useHistory();
+
+   console.log(location.state);
 
    const handleGoogleSign = () => {
       signInWithGoogle().then((result) => {
          setUserLoading(false);
-         console.log(result.user)
+         location.state
+            ? history.push(location.state?.from)
+            : history.push('/');
+      }).catch(err => {
+         setError(err.message);
+         console.log(error);
       });
    };
+
    const handleSubmit = (e) => {
       e.preventDefault();
    };

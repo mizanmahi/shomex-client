@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
+import SectionsHeading from '../SectionsHeading/SectionsHeading';
 import Service from '../Service/Service';
 import Spinner from '../Spinner/Spinner';
 
@@ -11,15 +12,10 @@ const Services = () => {
    return (
       <section className='my-10'>
          <div className='sm:container px-1'>
-            <div className='sectionHeading mb-10 text-center'>
-               <h2 className='text-4xl font-bold text-blue-900'>
-                  Our Services
-               </h2>
-               <p className='text-gray-700 text-xl'>
-                  Choose the one according to your needs
-               </p>
-               <hr className='w-16 h-1 bg-blue-900 mt-2 mx-auto' />
-            </div>
+            <SectionsHeading
+               heading='Choose the one according to your needs'
+               mainHeading='Our Services'
+            />
 
             <>
                {loading ? (
