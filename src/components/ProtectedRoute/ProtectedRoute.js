@@ -5,7 +5,6 @@ import Spinner from '../Spinner/Spinner';
 
 const ProtectedRoute = ({ children, ...rest }) => {
    const { user, userLoading } = useAuth();
-   console.log(userLoading);
    if (userLoading) return <Spinner />;
    return (
       <Route

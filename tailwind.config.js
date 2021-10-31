@@ -16,6 +16,9 @@ module.exports = {
       extend: {
          colors: {
             googleBlue: '#4285F4',
+          },
+          height: {
+             'h-xxxl': '35rem'
           }
       },
    },

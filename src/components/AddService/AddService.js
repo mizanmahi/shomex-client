@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 import { useAuth } from '../../hooks/useAuth';
 import SectionsHeading from '../SectionsHeading/SectionsHeading';
-import { ToastContainer, toast } from 'react-toastify';
 
 const AddService = () => {
    const {
@@ -18,14 +18,20 @@ const AddService = () => {
    } = useAuth();
 
    const onSubmit = async (formData) => {
-      console.log(formData);
       formData.addedBy = displayName;
       const { data } = await axios.post(
-         'http://localhost:5000/addService',
+         'https://shomex-server.herokuapp.com/addService',
          formData
       );
       if (data.insertedId) {
-         toast.success('Order Placed Successfully!');
+         await Swal.fire({
+            title: 'New service is added',
+            icon: 'success',
+            confirmButtonText: 'Okay',
+            confirmButtonColor: '#1e3a8a',
+            background: '#dbeafe',
+            width: '25rem',
+         });
          reset();
       }
    };
@@ -177,21 +183,8 @@ const AddService = () => {
                </form>
             </div>
          </div>
-         <ToastContainer
-            position='top-center'
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            className='toast-success-container-after toast-success-container'
-         />
       </section>
    );
 };
 
 export default AddService;
-

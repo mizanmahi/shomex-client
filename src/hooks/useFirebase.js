@@ -24,13 +24,7 @@ const useFirebase = () => {
       return signInWithPopup(auth, googleProvider);
    };
 
-   const logOutUser = () => {
-      signOut(auth)
-         .then(() => {
-            console.log('User signed out');
-         })
-         .catch((err) => setError(err.message));
-   };
+   const logOutUser = () => signOut(auth);
 
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,7 +38,6 @@ const useFirebase = () => {
       return unsubscribe;
    }, []);
 
-   console.log(user);
    return {
       user,
       error,

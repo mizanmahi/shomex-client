@@ -2,6 +2,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AddService from './components/AddService/AddService';
 import AuthContextProvider from './components/AuthContextProvider/AuthContextProvider';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import ManageAllOrders from './components/ManageAllOrders/ManageAllOrders';
 import MyService from './components/MyService/MyService';
@@ -39,6 +40,7 @@ function App() {
                      <ManageAllOrders />
                   </ProtectedRoute>
                </Switch>
+               <Footer />
             </div>
          </BrowserRouter>
       </AuthContextProvider>

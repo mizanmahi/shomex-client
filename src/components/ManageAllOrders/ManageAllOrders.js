@@ -11,8 +11,7 @@ const ManageAllOrders = () => {
       data: orders,
       setData,
       loading,
-      error,
-   } = useFetch('http://localhost:5000/allOrders');
+   } = useFetch('https://shomex-server.herokuapp.com/allOrders');
 
    const cancelOrderHandler = async (id) => {
       const response = await Swal.fire({
@@ -22,7 +21,7 @@ const ManageAllOrders = () => {
          confirmButtonText: 'Confirm',
          confirmButtonColor: '#EE4B2B',
          showCancelButton: true,
-         cancelButtonText: 'No Keep My Order',
+         cancelButtonText: 'No Keep This Order',
          cancelButtonColor: '#1e3a8a',
          background: '#dbeafe',
          width: '25rem',
@@ -30,7 +29,7 @@ const ManageAllOrders = () => {
 
       if (response.isConfirmed) {
          const { data } = await axios.delete(
-            `http://localhost:5000/deleteOrder/${id}`
+            `https://shomex-server.herokuapp.com/deleteOrder/${id}`
          );
          if (data.deletedCount) {
             setData((prevOrders) =>
@@ -41,24 +40,24 @@ const ManageAllOrders = () => {
       }
    };
 
+
    const handleApproveOrder = async (id) => {
-      const { data } = await axios.put(`http://localhost:5000/approve/${id}`);
+      const { data } = await axios.put(`https://shomex-server.herokuapp.com/approve/${id}`);
       if (data.modifiedCount) {
          setData((prevOrders) =>
             prevOrders.map((order) => {
                if (order._id === id) {
                   order.orderStatus = 'approved';
-                  console.log('fjdhfsdfhjg');
                   return order;
                }
                return order;
             })
          );
 
-         toast.success('Order Approved!')
-        
+         toast.success('Order Approved!');
       }
    };
+
 
    return (
       <section className='my-10'>
@@ -119,12 +118,21 @@ const ManageAllOrders = () => {
                                  >
                                     status: {orderStatus.toUpperCase()}
                                  </p>
-                                 <button
-                                    className='bg-green-600 hover:bg-green-400 text-white shadow px-3 py-2 mt-2'
-                                    onClick={() => handleApproveOrder(_id)}
-                                 >
-                                    Approve Order
-                                 </button>
+                                 {orderStatus === 'pending' ? (
+                                    <button
+                                       className='bg-green-600 hover:bg-green-400 text-white shadow px-3 py-2 mt-2 disabled:opacity-50'
+                                       onClick={() => handleApproveOrder(_id)}
+                                    >
+                                       Approve Order
+                                    </button>
+                                 ) : (
+                                    <button
+                                       className='bg-gray-200 text-white shadow px-3 py-2 mt-2 cursor-not-allowed'
+                                       disabled
+                                    >
+                                       Approve Order
+                                    </button>
+                                 )}
                                  <button
                                     className='border border-gray-400 px-3 py-2 mt-2 hover:bg-gray-400'
                                     onClick={() => cancelOrderHandler(_id)}
@@ -162,7 +170,7 @@ const ManageAllOrders = () => {
             )}
          </div>
          <ToastContainer
-            position='top-center'
+            position='top-left'
             autoClose={2000}
             hideProgressBar={false}
             newestOnTop={false}

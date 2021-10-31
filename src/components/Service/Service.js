@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Service = ({ service }) => {
    const { name, imageUrl, description, price, _id } = service;
    return (
-      <div className='max-w-xs'>
-         <img src={imageUrl} alt='service' className='max-w-xs' />
-         <div>
+      <div className='max-w-xs bg-blue-100 shadow'>
+         <img src={imageUrl} alt='service' className='max-w-xs mx-auto' style={{maxHeight: '21rem'}}/>
+         <div className='px-5 py-3'>
             <div>
                <h2 className='text-2xl text-blue-900 font-bold'>{name}</h2>
                <div className='flex flex-col items-start mt-3'>
@@ -20,7 +20,7 @@ const Service = ({ service }) => {
                      Get this Service
                   </Link>
                </div>
-               <p className='text-md text-gray-700'>{description}</p>
+               <p className='text-md text-gray-700'>{description.slice(0,60)}...</p>
             </div>
          </div>
       </div>

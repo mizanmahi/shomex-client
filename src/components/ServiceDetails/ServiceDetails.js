@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../Spinner/Spinner';
 import { useAuth } from '../../hooks/useAuth';
@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
-import './toast.css'
+import './toast.css';
+import Swal from 'sweetalert2';
 
 const ServiceDetails = () => {
    const { id } = useParams();
@@ -23,42 +24,60 @@ const ServiceDetails = () => {
       data: service,
       loading,
       error,
-   } = useFetch(`http://localhost:5000/service/${id}`);
+   } = useFetch(`https://shomex-server.herokuapp.com/service/${id}`);
+
+   const history = useHistory();
 
    const onSubmit = async (formData) => {
       formData.orderStatus = 'pending';
       formData.orderItem = service;
       formData.createdAt = moment().format('MMMM Do YYYY, h:mm:ss a');
-      console.log(formData);
 
       const { data } = await axios.post(
-         'http://localhost:5000/order',
+         'https://shomex-server.herokuapp.com/order',
          formData
       );
       if (data.insertedId) {
-         toast.success('Order Placed Successfully!');
+         // toast.success('Order Placed Successfully!');
          reset();
+         const response = await Swal.fire({
+            title: 'Thanks for your Order',
+            text: `${service.name} was added to your order list`,
+            icon: 'success',
+            confirmButtonText: 'Track Your Orders',
+            confirmButtonColor: '#1e3a8a',
+            showCancelButton: true,
+            cancelButtonText: 'See other services',
+            cancelButtonColor: '#1e3a8a',
+            background: '#dbeafe',
+            width: '25rem',
+         });
+
+         if (response.isConfirmed) {
+            history.push('/myOrders');
+         } else {
+            history.push('/'); 
+         }
       }
    };
 
-   console.log(errors);
 
    return (
       <section className='bg-blue-100'>
-         <div className='sm:container px-1'>
+         <div className='sm:container px-2'>
             <div className='md:grid grid-cols-2 items-center gap-4 py-16'>
                <div>
                   {loading ? (
                      <Spinner />
                   ) : (
-                     <div className='flex items-center'>
+                     <div className='flex sm:flex-row flex-col items-center justify-center'>
                         <img
                            src={service?.imageUrl}
                            alt='service'
                            className='w-1/2 mr-5'
                         />
                         <div>
-                           <h2 className='text-4xl text-blue-900 font-bold'>
+                           <h2 className='md:text-4xl text-xl text-blue-900 font-bold'>
                               {service?.name}
                            </h2>
                            <p className='text-md text-gray-700 my-5'>
@@ -71,11 +90,11 @@ const ServiceDetails = () => {
                      </div>
                   )}
                </div>
-               <div className='w-2/3 justify-self-center'>
+               <div className='md:w-2/3 w-full justify-self-center mt-10 md:mt-0'>
                   {/*============================ shipping form======================== */}
                   <form
                      onSubmit={handleSubmit(onSubmit)}
-                     className='bg-blue-200 px-10 py-8 rounded'
+                     className='bg-blue-200 md:px-10 px-3 py-8 rounded'
                   >
                      <h2 className='text-3xl text-blue-900 font-bold mb-3'>
                         Fill the shipping information to continue
@@ -277,8 +296,9 @@ const ServiceDetails = () => {
                                  },
                                  required: {
                                     value: true,
-                                    message: 'Contact number must need to provide'
-                                 }
+                                    message:
+                                       'Contact number must need to provide',
+                                 },
                               })}
                            />
                         </div>
@@ -296,7 +316,7 @@ const ServiceDetails = () => {
             </div>
          </div>
          <ToastContainer
-            position='top-center'
+            position='top-left'
             autoClose={2000}
             hideProgressBar={false}
             newestOnTop={false}

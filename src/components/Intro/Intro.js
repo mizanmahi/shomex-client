@@ -12,8 +12,8 @@ const Intro = () => {
                      Our Logistics
                   </h2>
                   <p className='text-gray-700 text-xl my-5'>The most trusted logistic service in Bangladesh. Ship, manage, track and deliver within single platform.</p>
-                  <button className='px-5 py-3 bg-blue-900 text-blue-100 rounded text-xl'>
-                     See Our Services
+                  <button className='px-5 py-3 bg-blue-900 text-blue-100 rounded text-xl shadow-lg'>
+                     See Our Services 
                   </button>
                </div>
                <div>
@@ -26,3 +26,5 @@ const Intro = () => {
 };
 
 export default Intro;
+
+

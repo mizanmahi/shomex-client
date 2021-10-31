@@ -10,15 +10,13 @@ const MyService = () => {
    const { user } = useAuth();
    const [myServices, setMyServices] = useState([]);
    const [loading, setLoading] = useState(false);
-   console.log(user.email);
    useEffect(() => {
       setLoading(true);
       axios
-         .get(`http://localhost:5000/myOrders/${user.email}`)
+         .get(`https://shomex-server.herokuapp.com/myOrders/${user.email}`)
          .then(({ data }) => {
             setLoading(false);
             setMyServices(data);
-            console.log(data);
          });
    }, [user.email]);
 
@@ -38,7 +36,7 @@ const MyService = () => {
 
       if (response.isConfirmed) {
          const { data } = await axios.delete(
-            `http://localhost:5000/deleteOrder/${id}`
+            `https://shomex-server.herokuapp.com/deleteOrder/${id}`
          );
          if (data.deletedCount) {
             setMyServices((prevServices) =>
@@ -53,18 +51,36 @@ const MyService = () => {
       <section className='my-10'>
          <div className='sm:container px-1'>
             <SectionsHeading
-               mainHeading='Your Services'
+               mainHeading='Your Orders'
                heading='All the services you choose from SHOMEX'
             />
-            {loading ? (
+            {loading && myServices.length === 0 ? (
                <Spinner />
             ) : (
                <div className='bg-blue-100 w-full px-5 py-3'>
-                  <h2 className='text-4xl text-blue-900 font-bold'>Orders</h2>
-                  <p className='text-gray-500 font-semibold'>
-                     {myServices.length}{' '}
-                     {myServices.length > 1 ? 'Items' : 'Item'}
-                  </p>
+                  <div className='flex justify-between'>
+                     <div>
+                        <h2 className='text-4xl text-blue-900 font-bold'>
+                           Orders
+                        </h2>
+                        <p className='text-gray-600 text-xl font-semibold'>
+                           {myServices.length}{' '}
+                           {myServices.length > 1 ? 'Items' : 'Item'}
+                        </p>
+                     </div>
+                     <div className='text-right'>
+                        <h2 className='text-4xl text-blue-900 font-bold'>
+                           Total Cost
+                        </h2>
+
+                        <p className='text-gray-600 font-semibold text-xl'>
+                           {myServices.reduce(
+                              (pre, curr) => (pre += +curr?.orderItem?.price),
+                              0
+                           )}Tk
+                        </p>
+                     </div>
+                  </div>
                   <div className='mt-5'>
                      {myServices.map(
                         ({
@@ -146,7 +162,7 @@ const MyService = () => {
             )}
          </div>
          <ToastContainer
-            position='top-center'
+            position='top-left'
             autoClose={2000}
             hideProgressBar={false}
             newestOnTop={false}
