@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import SectionsHeading from '../SectionsHeading/SectionsHeading';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../Spinner/Spinner';

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import SectionsHeading from '../SectionsHeading/SectionsHeading';
 import Service from '../Service/Service';

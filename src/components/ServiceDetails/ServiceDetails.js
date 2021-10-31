@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import './toast.css';
 import Swal from 'sweetalert2';
 
@@ -20,11 +20,9 @@ const ServiceDetails = () => {
       reset,
    } = useForm();
 
-   const {
-      data: service,
-      loading,
-      error,
-   } = useFetch(`https://shomex-server.herokuapp.com/service/${id}`);
+   const { data: service, loading } = useFetch(
+      `https://shomex-server.herokuapp.com/service/${id}`
+   );
 
    const history = useHistory();
 
@@ -56,11 +54,10 @@ const ServiceDetails = () => {
          if (response.isConfirmed) {
             history.push('/myOrders');
          } else {
-            history.push('/'); 
+            history.push('/');
          }
       }
    };
-
 
    return (
       <section className='bg-blue-100'>
