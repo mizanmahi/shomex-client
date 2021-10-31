@@ -1,0 +1,13 @@
+[debug] [2021-10-31T16:50:42.337Z] ----------------------------------------------------------------------
+[debug] [2021-10-31T16:50:42.339Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-10-31T16:50:42.339Z] CLI Version:   9.20.0
+[debug] [2021-10-31T16:50:42.339Z] Platform:      win32
+[debug] [2021-10-31T16:50:42.339Z] Node Version:  v16.6.0
+[debug] [2021-10-31T16:50:42.341Z] Time:          Sun Oct 31 2021 22:50:42 GMT+0600 (Bangladesh Standard Time)
+[debug] [2021-10-31T16:50:42.341Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-10-31T16:50:42.402Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-10-31T16:50:42.402Z] > authorizing via signed-in user (mizanmahi.dev@gmail.com)
+[debug] [2021-10-31T16:50:42.402Z] [iam] checking project shomex-bd for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-10-31T16:50:42.405Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/shomex-bd:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
